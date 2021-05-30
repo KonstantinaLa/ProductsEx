@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using FirstAskisiOmadiki.Data.Configurations;
 using FirstAskisiOmadiki.Models;
 
 namespace FirstAskisiOmadiki.Data
@@ -11,16 +12,9 @@ namespace FirstAskisiOmadiki.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Product>()
-                .Property(p => p.Title)
-                .IsRequired()
-                .HasMaxLength(20);
+            modelBuilder.Configurations.Add(new SupplierConfig());
 
-
-            modelBuilder.Entity<Product>()
-                .Property(p => p.DateModified)
-                .HasColumnType("date");
-
+            modelBuilder.Configurations.Add(new ProductConfig());
         }
     }
 }

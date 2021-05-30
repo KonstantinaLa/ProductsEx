@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.Web.Services.Description;
 
 namespace FirstAskisiOmadiki.Models.Custom_Validations
 {
@@ -11,6 +12,7 @@ namespace FirstAskisiOmadiki.Models.Custom_Validations
     {
         public static ValidationResult ValidateBeginsWithCapital(string value, ValidationContext context)
         {
+            if (value is null) return new ValidationResult(string.Format("Required"), new List<string> { context.MemberName });
 
             if (Char.IsUpper(value , 0))
             {
@@ -29,8 +31,9 @@ namespace FirstAskisiOmadiki.Models.Custom_Validations
             return new ValidationResult(string.Format($"Invalid {context.MemberName}"), new List<string> { context.MemberName });
         }
         
-        public static ValidationResult ValidateDate( DateTime value , ValidationContext context)
+        public static ValidationResult ValidateDate( DateTime? value , ValidationContext context)
         {
+
             if (value < DateTime.Now)
             {
                 return ValidationResult.Success;

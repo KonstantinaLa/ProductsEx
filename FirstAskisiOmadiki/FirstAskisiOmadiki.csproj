@@ -53,8 +53,20 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.6.1\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.Mvc5.8.6.1\lib\net45\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.ValidatorAttribute, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.ValidatorAttribute.8.6.1\lib\net45\FluentValidation.ValidatorAttribute.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
@@ -129,6 +141,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Data\Configurations\ProductConfig.cs" />
+    <Compile Include="Data\Configurations\SupplierConfig.cs" />
     <Compile Include="Data\MyDatabase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -141,9 +155,28 @@
     <Compile Include="Migrations\202105251908298_ConfigProdcuts.designer.cs">
       <DependentUpon>202105251908298_ConfigProdcuts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105301507549_AddedSuppliersAndManyToManyRelationships.cs" />
+    <Compile Include="Migrations\202105301507549_AddedSuppliersAndManyToManyRelationships.designer.cs">
+      <DependentUpon>202105301507549_AddedSuppliersAndManyToManyRelationships.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105301548574_AddedFluentAPI.cs" />
+    <Compile Include="Migrations\202105301548574_AddedFluentAPI.designer.cs">
+      <DependentUpon>202105301548574_AddedFluentAPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105301559072_AddedFluentAPIAgain.cs" />
+    <Compile Include="Migrations\202105301559072_AddedFluentAPIAgain.designer.cs">
+      <DependentUpon>202105301559072_AddedFluentAPIAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105301626508_AddedValidationMethods.cs" />
+    <Compile Include="Migrations\202105301626508_AddedValidationMethods.designer.cs">
+      <DependentUpon>202105301626508_AddedValidationMethods.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Custom_Validations\MyValidationMethods.cs" />
+    <Compile Include="Models\Custom_Validations\ProductValidator.cs" />
+    <Compile Include="Models\Custom_Validations\SupplierValidator.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ProductRepos.cs" />
   </ItemGroup>
@@ -191,7 +224,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data\Configurations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -212,6 +244,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105251908298_ConfigProdcuts.resx">
       <DependentUpon>202105251908298_ConfigProdcuts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105301507549_AddedSuppliersAndManyToManyRelationships.resx">
+      <DependentUpon>202105301507549_AddedSuppliersAndManyToManyRelationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105301548574_AddedFluentAPI.resx">
+      <DependentUpon>202105301548574_AddedFluentAPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105301559072_AddedFluentAPIAgain.resx">
+      <DependentUpon>202105301559072_AddedFluentAPIAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105301626508_AddedValidationMethods.resx">
+      <DependentUpon>202105301626508_AddedValidationMethods.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
