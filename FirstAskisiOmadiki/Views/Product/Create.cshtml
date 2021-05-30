@@ -1,0 +1,56 @@
+﻿@model FirstAskisiOmadiki.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@Html.ActionLink("Back To Products", "Product", null, new { @class = "btn btn-primary" })
+
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Products</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(p => p.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(p => p.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(p => p.Title,"", new { @class="text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.DateModified, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(p => p.DateModified, new { htmlAttributes = new { type = "date", @class = "form-control" } })
+            @Html.ValidationMessageFor(p => p.DateModified, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.IsExpired, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(p => p.IsExpired, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(p => p.IsExpired, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(p => p.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(p => p.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FirstAskisiOmadiki.Models.Product>
+@{
+    ViewBag.Title = "Product";
+}
+
+<h2>Product</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(p => p.Title)</th>
+            <th>@Html.DisplayNameFor(p => p.IsExpired)</th>
+            <th>@Html.DisplayNameFor(p => p.DateModified)</th>
+            <th>@Html.DisplayNameFor(p => p.Price)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr id="@product.ProductId">
+                <td>@product.Title</td>
+                <td>@Html.DisplayFor(p => product.IsExpired)</td>
+                <td>@product.DateModified</td>
+                <td>@product.Price</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = product.ProductId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = product.ProductId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Details", "Details", new { id = product.ProductId }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Create", "Create", "Product", new { @class = "btn btn-success" })
