@@ -1,0 +1,29 @@
+﻿@model FirstAskisiOmadiki.Models.Product
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this product?</h3>
+<div>
+    <h4>PRODUCT!</h4>
+    <ul class="list-unstyled">
+        <li><strong>@Html.DisplayNameFor(p => p.Title):</strong> @Model.Title</li>
+        <li><strong>@Html.DisplayNameFor(p => p.IsExpired):</strong> @Model.IsExpired</li>
+        <li><strong>@Html.DisplayNameFor(p => p.DateModified):</strong> @Model.DateModified</li>
+        <li><strong>@Html.DisplayNameFor(p => p.Price):</strong> @Model.Price €</li>
+    </ul>
+    
+    @using (Html.BeginForm("Delete","Product", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(p=>p.ProductId)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger"/>
+        </div>
+
+    }
+
+    @Html.ActionLink("Return", "Product", "", new {@class = "btn btn-primary"})
+</div>

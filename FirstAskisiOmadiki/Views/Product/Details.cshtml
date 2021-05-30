@@ -1,0 +1,15 @@
+﻿@model FirstAskisiOmadiki.Models.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <ul class="list-unstyled">
+        <li><strong>@Html.DisplayNameFor(p => p.Title):</strong> @Model.Title</li>
+        <li><strong>@Html.DisplayNameFor(p => p.IsExpired):</strong> @Model.IsExpired</li>
+        <li><strong>@Html.DisplayNameFor(p => p.DateModified):</strong> @Model.DateModified</li>
+        <li><strong>@Html.DisplayNameFor(p => p.Price):</strong> @Model.Price €</li>
+    </ul>
+    @Html.ActionLink("Return","Product","",new {@class="btn btn-primary"})
+</div>
