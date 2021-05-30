@@ -7,6 +7,7 @@ namespace FirstAskisiOmadiki.Data
     public class MyDatabase:DbContext
     {
         public DbSet<Product> ProductsDbSet { get; set; }
+        public DbSet<Supplier> SuppliersDbSet { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#resetButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#submitButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

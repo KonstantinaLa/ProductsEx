@@ -9,15 +9,15 @@ namespace FirstAskisiOmadiki.Models
     [Validator(typeof(SupplierValidator))]
     public class Supplier
     {
+        public Supplier()
+        {
+            Products = new HashSet<Product>();
+        }
+
         [Display(Name = "SupplierId")]
         public int SupplierId { get; set; }
         [Required]
         public string Name { get; set; }
         public virtual ICollection<Product> Products { get; set; }
-
-        public Supplier()
-        {
-            Products = new HashSet<Product>();
-        }
     }
 }

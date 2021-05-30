@@ -1,17 +1,32 @@
-﻿@model IEnumerable<FirstAskisiOmadiki.Models.Product>
+﻿@using Antlr.Runtime.Tree
+@model IEnumerable<FirstAskisiOmadiki.Models.Product>
 @{
     ViewBag.Title = "Product";
 }
 
 <h2>Product</h2>
 
+@using (Html.BeginForm("Product", "Product", FormMethod.Get))
+{
+    @Html.TextBox("searchTitle", null, new { @class = "form-control", placeholder = "Search Title", type = "search", autocomplete = "off" })
+
+
+    <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSortOrder" />
+
+    <input id="submitButton" type="submit" value="Search" class="btn btn-info btn-sm" />
+    <input id="resetButton" type="reset" value="Reset" class="btn btn-default btn-sm" />
+
+}
+
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(p => p.Title)</th>
+            <th>@Html.ActionLink("Title", "Product", "Product", new { sortOrder = ViewBag.NSP, searchTitle = ViewBag.CurrentTitle }, new { @class = "btn-default" })</th>
             <th>@Html.DisplayNameFor(p => p.IsExpired)</th>
             <th>@Html.DisplayNameFor(p => p.DateModified)</th>
-            <th>@Html.DisplayNameFor(p => p.Price)</th>
+            <th>@Html.ActionLink("Price", "Product", "Product", new { sortOrder = ViewBag.PSP }, new { @class = "btn-default" })</th>
+            <th>Suppliers</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -24,6 +39,19 @@
                 <td>@product.DateModified</td>
                 <td>@product.Price</td>
                 <td>
+
+                    <ul class="list-unstyled">
+
+
+                        @foreach (var supplier in product.Suppliers)
+                        {
+                            <li>
+                                @supplier.Name
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new { id = product.ProductId }, new { @class = "btn btn-info" })
                     @Html.ActionLink("Delete", "Delete", new { id = product.ProductId }, new { @class = "btn btn-danger" })
                     @Html.ActionLink("Details", "Details", new { id = product.ProductId }, new { @class = "btn btn-info" })
@@ -34,3 +62,16 @@
 </table>
 
 @Html.ActionLink("Create", "Create", "Product", new { @class = "btn btn-success" })
+
+@section scripts
+{
+    <script>
+
+        $("#resetButton").click(function (e) {
+
+                $("#searchTitle").val("");
+            }
+        );
+
+    </script>
+}

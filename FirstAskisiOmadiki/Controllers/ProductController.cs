@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using FirstAskisiOmadiki.Models;
 using FirstAskisiOmadiki.Repositories;
@@ -13,9 +14,32 @@ namespace FirstAskisiOmadiki.Controllers
         {
             repos = new ProductRepos();
         }
-        public ActionResult Product()
+        public ActionResult Product(string searchTitle , string sortOrder )
         {
             var products = repos.GetAllProducts();
+
+            ViewBag.currentName = searchTitle;
+            ViewBag.currentSortOrder = sortOrder;
+
+            ViewBag.NSP = string.IsNullOrEmpty(sortOrder) ? "titleDesc" : "";
+            ViewBag.PSP = sortOrder == "priceAsc" ? "priceDesc" : "priceAsc";
+
+
+            if (!string.IsNullOrWhiteSpace(searchTitle))
+            {
+                products = products.Where(p => p.Title.ToUpper().Contains(searchTitle.ToUpper())).ToList();
+            }
+
+
+
+            switch (sortOrder)
+            {
+                case "titleDesc" : products = products.OrderByDescending(p => p.Title).ToList(); break;
+                case "priceAsc" : products = products.OrderBy(p => p.Price).ToList(); break;
+                case "priceDesc" : products = products.OrderByDescending(p => p.Price).ToList(); break;
+                default: products = products.OrderBy(p => p.Title).ToList(); break;
+            }
+
 
             return View(products);
         }
