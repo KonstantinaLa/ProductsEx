@@ -81,8 +81,14 @@ namespace FirstAskisiOmadiki.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete([Bind(Include = "ProductId,Title,IsExpired,DateModified,Price")] Product product)
+        [ActionName("Delete")]
+        public ActionResult ConfirmDelete(int? id)
         {
+            var product = repos.FindById(id);
+
+            if (product == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+
             repos.Delete(product);
             return RedirectToAction("Product");
         }
