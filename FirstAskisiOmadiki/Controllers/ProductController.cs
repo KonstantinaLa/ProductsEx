@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using FirstAskisiOmadiki.Models;
@@ -21,8 +22,12 @@ namespace FirstAskisiOmadiki.Controllers
             ViewBag.currentName = searchTitle;
             ViewBag.currentSortOrder = sortOrder;
 
-            ViewBag.NSP = string.IsNullOrEmpty(sortOrder) ? "titleDesc" : "";
+            //ViewBag.NSP = String.IsNullOrEmpty(sortOrder) ? "titleDesc" : "";
+            ViewBag.NSP = sortOrder == "titleAsc" ? "titleDesc" : "titleAsc";
             ViewBag.PSP = sortOrder == "priceAsc" ? "priceDesc" : "priceAsc";
+
+
+
 
 
             if (!string.IsNullOrWhiteSpace(searchTitle))
@@ -35,8 +40,12 @@ namespace FirstAskisiOmadiki.Controllers
             switch (sortOrder)
             {
                 case "titleDesc" : products = products.OrderByDescending(p => p.Title).ToList(); break;
+                //prostethike
+                case "titleAsc" : products = products.OrderBy(p => p.Title).ToList(); break;
+
                 case "priceAsc" : products = products.OrderBy(p => p.Price).ToList(); break;
                 case "priceDesc" : products = products.OrderByDescending(p => p.Price).ToList(); break;
+
                 default: products = products.OrderBy(p => p.Title).ToList(); break;
             }
 

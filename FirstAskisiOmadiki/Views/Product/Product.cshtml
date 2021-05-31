@@ -14,18 +14,17 @@
     <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSortOrder" />
 
     <input id="submitButton" type="submit" value="Search" class="btn btn-info btn-sm" />
-    <input id="resetButton" type="reset" value="Reset" class="btn btn-default btn-sm" />
+    <input id="resetButton" type="button" value="Reset" class="btn btn-default btn-sm" />
 
 }
 
-
-<table class="table table-bordered table-hover">
+<table class="table">
     <thead>
         <tr>
-            <th>@Html.ActionLink("Title", "Product", "Product", new { sortOrder = ViewBag.NSP, searchTitle = ViewBag.CurrentTitle }, new { @class = "btn-default" })</th>
+            <th>@Html.ActionLink("Title", "Product", "Product", new { sortOrder = ViewBag.NSP, searchTitle = ViewBag.CurrentTitle }, new { @class = "sorting-btn" })</th>
             <th>@Html.DisplayNameFor(p => p.IsExpired)</th>
             <th>@Html.DisplayNameFor(p => p.DateModified)</th>
-            <th>@Html.ActionLink("Price", "Product", "Product", new { sortOrder = ViewBag.PSP }, new { @class = "btn-default" })</th>
+            <th>@Html.ActionLink("Price", "Product", "Product", new { sortOrder = ViewBag.PSP }, new { @class = "sorting-btn" })</th>
             <th>Suppliers</th>
             <th>Actions</th>
         </tr>
@@ -52,16 +51,68 @@
                     </ul>
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = product.ProductId }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = product.ProductId }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Details", "Details", new { id = product.ProductId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Edit", "Edit", new { id = product.ProductId }, new { @class = "btn btn-edit-details" })
+                    @Html.ActionLink("Delete", "Delete", new { id = product.ProductId }, new { @class = "btn btn-delete" })
+                    @Html.ActionLink("Details", "Details", new { id = product.ProductId }, new { @class = "btn btn-edit-details" })
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+
 @Html.ActionLink("Create", "Create", "Product", new { @class = "btn btn-success" })
+
+@section MYCustomCSS{
+    <style>
+        body {
+            background-color: #c2d8d5;
+            color: #4e4848;
+        }
+
+        .table {
+            margin: 10px;
+        }
+
+        #resetButton {
+            margin: 10px;
+            background-color: #e6dfdf;
+        }
+
+        #submitButton {
+            margin: 10px 10px 10px 0;
+            background-color: #E8A87c;
+        }
+
+        .btn-edit-details {
+            background-color: #85a1b2;
+            color: #f3e7e7;
+        }
+
+        .btn-delete {
+            background-color: #f55454;
+            color: #f3e7e7;
+        }
+
+        h2 {
+            color: #302e2e;
+        }
+
+        .table th {
+            background-color: #719e98;
+            color: #302e2e;
+        }
+
+        tr:hover {
+            background-color: #b5d0cc;
+        }
+
+        .sorting-btn {
+            color: inherit;
+        }
+    </style>
+
+}
 
 @section scripts
 {
@@ -69,9 +120,17 @@
 
         $("#resetButton").click(function (e) {
 
-                $("#searchTitle").val("");
-            }
+            $("#searchTitle").val("");
+        }
         );
 
     </script>
 }
+
+
+
+
+
+
+
+
